@@ -1,3 +1,10 @@
+"""
+如果想运行以下（屎山）代码，
+请先保证你已经安装成功manimCE，
+并且可以调用function.py里被调用的函数
+"""
+
+
 from manim import *
 from function import *
 
