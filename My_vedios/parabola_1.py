@@ -48,7 +48,6 @@ class Math(MovingCameraScene):
         labels = ax.get_axis_labels(x_label="x", y_label="y")
 #原点
         o = Dot(ax.c2p(0,0))
-        
 #抛物线图像        
         f_xy = ax.plot(
             func,
@@ -74,35 +73,28 @@ class Math(MovingCameraScene):
             x_range=[-2.5,2*np.sqrt(5)-4+0.01],
             use_smoothing=True
         ).rotate(PI/2,about_point=ax.c2p(0,0))
-
 #准线图像
         y = DashedVMobject(ax.plot(func2,x_range=[-6,3]).rotate(-PI/2,about_point=ax.c2p(-1,0)))
-
 #焦点
         f = Dot(ax.c2p(1,0))
         note_f = Tex('F').scale(0.6)
         note_f.add_updater(lambda x:x.next_to(f,DOWN*0.2))
-
 #抛物线上的动点P
         p = Dot(ax.i2gp(f_xy.t_max,f_xy), color=MAROON)
         note_p = Tex('P').scale(0.6).set_color(MAROON)
         note_p.add_updater(lambda x:x.next_to(p,RIGHT,buff=0.1))
-
 #准线垂足v
         e = Dot(ax.c2p(-1,ax.p2c(p.get_center())[1],0))
         e.add_updater(lambda x:x.become(Dot(ax.c2p(-1,ax.p2c(p.get_center())[1],0))))
         note_e = Tex('E').scale(0.6)
         note_e.add_updater(lambda x:x.next_to(e,DR*0.1))
-
 #直线x=2
         y_1 = Line(ax.c2p(-2,4.8),ax.c2p(-2,-3)).set_color(GREEN).set_sheen(0.3,DOWN)
-
     #垂足
-        h = Dot(ax.c2p(-2,ax.p2c(p.get_center())[1],0))
-        h.add_updater(lambda x:x.become(Dot(ax.c2p(-2,ax.p2c(p.get_center())[1],0))))
-        note_h = Tex('H').scale(0.6).set_color(YELLOW_A)
+        h = Dot(ax.c2p(-2,ax.p2c(p.get_center())[1],0)).set_color(GREEN_A)
+        h.add_updater(lambda x:x.become(Dot(ax.c2p(-2,ax.p2c(p.get_center())[1],0)).set_color(GREEN_A)))
+        note_h = Tex('H').scale(0.6).set_color(GREEN_A)
         note_h.add_updater(lambda x:x.next_to(h,LEFT,buff=0.1))
-
 #圆心
         c = Dot(ax.c2p(-5,3)).set_color(RED_C)
         note_c = Tex('C').scale(0.6).set_color(RED_C)
@@ -111,7 +103,6 @@ class Math(MovingCameraScene):
         cir = Circle(
             radius=np.sqrt(2)*0.6
         ).move_to(c.get_center()).set_color([ORANGE,PINK]).set_sheen_direction(UL)
-
         circle = Circle(
             radius=1.21,
             stroke_width=2
@@ -119,22 +110,17 @@ class Math(MovingCameraScene):
 #切线
         line_1 = TangentLine(cir, alpha=0.0)
         line_2 = TangentLine(cir, alpha=0.25)
-        
 #切线交点        
         q = Dot(get_intersect(line_1,line_2,line_1))
         note_q = Tex('Q').scale(0.6).set_color(YELLOW_A)
         note_q.add_updater(lambda x:x.next_to(q,UR,buff=0.1))
-
-
-
-
 #绘制过原点与q点的正比例函数图像        
         def get_zes_graph(t):
             x = ax.p2c(q.get_center())[0]
             y = ax.p2c(q.get_center())[1]
             k = y/x
             return k*t
-        zes_graph = ax.plot(get_zes_graph,x_range=[-4,4]).set_color(YELLOW_B)
+        zes_graph = ax.plot(get_zes_graph,x_range=[-4,3]).set_color(YELLOW_B)
 
         q_copy = Dot(ax.i2gp(-0.8,zes_graph)).set_color(YELLOW_A)
         note_q_copy = Tex('Q').scale(0.6).set_color(YELLOW_A)
@@ -247,7 +233,6 @@ class Math(MovingCameraScene):
         n = Dot().add_updater(lambda x:x.move_to(tan_dot2)).set_color(BLUE)
         note_n = Tex('N').scale(0.6).add_updater(lambda x:x.next_to(n,DR*0.1))
 
-
 #绘制连线
         line_oq = Line(o,q_copy)
         line_pq = Line(p,q_copy).set_color(blue)
@@ -346,7 +331,7 @@ class Math(MovingCameraScene):
 
         self.play(Write(title),rate_functions=linear,run_time=5)    
 
-        text2 = Text("若有兴趣可暂停自行计算后跳转至视频末端查看答案")
+        text2 = Text("若有兴趣可暂停自行计算后跳转至视频末端查看答案",font='Source Han Sans SC',weight=BOLD,)
         text2.to_corner(DOWN,buff=1.2).scale(0.5)
 
         self.play(FadeIn(text2),run_time=1.5)
@@ -613,6 +598,10 @@ class Math(MovingCameraScene):
         )
         self.play(MoveAlongPath(p,f_xy_2),rate_function=linear,run_time=2.8)
         self.play(Create(line_fq),run_time=2)
+        self.play(
+            f.animate.set_color(YELLOW),
+            note_f.animate.set_color(YELLOW)
+        )
 
         solution9 = Tex(
             r'即：',
@@ -626,7 +615,7 @@ class Math(MovingCameraScene):
             r'$ +1=$',
             r'$\left | CF \right | -\left | CQ \right | $',
             r'+1'
-            r'$=3\sqrt{5} -2$',
+            r'$=3\sqrt{5} -1$',
             tex_template=TexTemplateLibrary.ctex,
         ).next_to(solution9,DOWN,buff=0).scale(0.8).align_to(solution9,LEFT)
         solution10[1].set_color(YELLOW)
