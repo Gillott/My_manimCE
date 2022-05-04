@@ -1,3 +1,10 @@
+"""
+ZesTable()类用于绘制生物棋盘法的表格，
+你也可以尝试使用manimCE自带的Table()类
+"""
+
+
+
 from manim import*
 
 class ZesTable():
