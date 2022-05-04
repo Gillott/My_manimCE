@@ -1,6 +1,6 @@
 """
 ZesTable()类用于绘制生物棋盘法的表格，
-你也可以尝试使用manimCE自带的Table()类
+当然，你也可以尝试使用manimCE自带的Table()类代替
 """
 
 
