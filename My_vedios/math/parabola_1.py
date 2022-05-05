@@ -1,9 +1,17 @@
+"""
+如果想运行以下（屎山）代码，
+请先保证你已经安装成功manimCE，
+并且可以使用func_math.py里被调用的函数。
+此代码渲染后的效果可以在：https://www.bilibili.com/video/BV1z3411K7cF 里查看
+"""
+
+
 from manim import *
 from function import *
 
 
 class ZesTex(Tex):
-    def __init__(self,*tex_strings, arg_separator="", **kwargs):
+    def __init__(self, *tex_strings, arg_separator="", **kwargs):
         super().__init__(*tex_strings, arg_separator=arg_separator,tex_template=TexTemplateLibrary.ctex,**kwargs)
         self.scale(0.65)
         
