@@ -2,7 +2,7 @@
 如果想运行以下（屎山）代码，
 请先保证你已经安装成功manimCE，
 并且可以使用func_math.py里被调用的函数。
-此代码渲染后的效果可以在：https://www.bilibili.com/video/BV1z3411K7cF 里查看
+此代码渲染后的效果见：https://www.bilibili.com/video/BV1z3411K7cF
 """
 
 
