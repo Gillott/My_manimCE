@@ -10,7 +10,8 @@ class ZesTable():
     """制作5*5规格的表格"""
     def get_zes_rectangle(self):
         """生成25个矩形框"""        
-        rectangles = VGroup(*[ Rectangle(WHITE,width=1.5,height=1)for i in range(25)])     #需要自行使用arrange_in_grid(rows=5,buff=0)排列成表格
+        rectangles = VGroup(*[ Rectangle(WHITE,width=1.5,height=1)for i in range(25)])
+        rectangles.arrange_in_grid(rows=5,buff=0)
         return rectangles
 
     def get_zes_text(self,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x):
