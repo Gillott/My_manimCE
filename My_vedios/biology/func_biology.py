@@ -9,7 +9,7 @@ from manim import*
 class ZesTable():
     """制作5*5规格的表格"""
     def get_zes_rectangle(self):
-        """生成25个矩形框"""        
+        """构建表格框架"""        
         rectangles = VGroup(*[ Rectangle(WHITE,width=1.5,height=1)for i in range(25)])
         rectangles.arrange_in_grid(rows=5,buff=0)
         return rectangles
@@ -25,7 +25,7 @@ class ZesTable():
 
     def get_zes_extra(self,a,b):
         """绘制并填写斜线表头，
-        若不需此操作则需自行将文字填补到第一个矩形框内"""
+        若不需此操作则需自行在VGroup中填写表头内容"""
         p1 = np.array([-3.75,2.5,0])
         p2 = np.array([-2.25,2.5,0])
         p3 = np.array([-3.75,1.5,0])
