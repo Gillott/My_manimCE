@@ -15,7 +15,7 @@ class ZesTable():
         return rectangles
 
     def get_zes_text(self,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x):
-        """填写表格内容"""
+        """填写表格内容（不含表头）"""
         vg1 = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x]
         texts = VGroup(*[Text('') for i in range(25)])
 
