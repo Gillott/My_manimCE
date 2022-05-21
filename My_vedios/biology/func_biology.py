@@ -7,35 +7,51 @@ ZesTable()类用于绘制生物棋盘法的表格，
 from manim import*
 
 class ZesTable():
-    """制作5*5规格的表格"""
-    def get_zes_rectangle(self):
-        """构建表格框架"""        
-        rectangles = VGroup(*[ Rectangle(WHITE,width=1.5,height=1)for i in range(25)])
-        rectangles.arrange_in_grid(rows=5,buff=0)
-        return rectangles
+    """制作表格"""
+    def __init__(self,rows:int,cols:int,width=1.5,height=1,):
+        """构建表格框架"""       
+        self.rows = rows            #行数
+        self.cols = cols            #列数
+        self.width = width          #单个矩形的宽度
+        self.height = height        #单个矩形的高度
 
-    def get_zes_text(self,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x):
-        """填写表格内容（不含表头）"""
-        vg1 = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x]
-        texts = VGroup(*[Text('') for i in range(25)])
+    def get_zes_table(self): 
+        """绘制表格"""
+        self.rectangles = VGroup(*[ Rectangle(WHITE,width =self.width,height=self.height)for i in range(self.rows*self.cols)])
+        self.rectangles.arrange_in_grid(rows=self.rows,buff=0)
+        return self.rectangles
 
-        for number in range(1,25):
-            texts[number].become(Text(vg1[number-1]).scale(0.7))
+    def get_zes_text(self,text:list):
+        """填写表格内容,输入的为一个list列表"""
+        n = 0
+        texts = VGroup(*[Text('') for i in range(self.rows*self.cols)])
+        while n < self.rows*self.cols:
+            texts[n].become(Text(text[n],font='Source Han Sans SC',weight=MEDIUM).scale(0.66))
+            n += 1
+            continue
         return texts
 
-    def get_zes_extra(self,a,b):
-        """绘制并填写斜线表头，
-        若不需此操作则需自行在VGroup中填写表头内容"""
-        p1 = np.array([-3.75,2.5,0])
-        p2 = np.array([-2.25,2.5,0])
-        p3 = np.array([-3.75,1.5,0])
-        p4 = np.array([-2.25,1.5,0])
-        triangle1 = Polygon(p1,p2,p4).set_color(WHITE)
-        triangle2 = Polygon(p1,p3,p4).set_color(WHITE)
+    def get_the_first_text(self,a,b):
+        """若需额外绘制斜线表头可调用此方法,
+        并且最好令get_zes_text中的实参list第一个元素为"",
+        以及需额外将此对象调整位置使之与表格第一个空对齐#move_to(obj[0])
+        """
+        rec = Rectangle(width=self.width,height=self.height)
+        points = rec.get_all_points()
+        #p1 = np.array([-3.75,2.5,0])
+        p1 = np.array(points[3])
+        #p2 = np.array([-2.25,2.5,0])
+        p2 = points[0]
+        #p3 = np.array([-3.75,1.5,0])
+        p3 = points[7]
+        #p4 = np.array([-2.25,1.5,0])
+        p4 = points[-4]
+        tri1 = Polygon(p1,p2,p4).set_color(WHITE)
+        tri2 = Polygon(p1,p3,p4).set_color(WHITE)
 
         t1 = Text(a).scale(0.7).set_color(RED)
-        t1.move_to(triangle1).shift(RIGHT*0.3,UP*0.15)
+        t1.move_to(tri1).shift(RIGHT*0.3,UP*0.15)
         t2 = Text(b).scale(0.7).set_color(BLUE)
-        t2.move_to(triangle2).shift(LEFT*0.3,DOWN*0.15)
-        vg2 = VGroup(t1,t2,triangle1,triangle2)
-        return vg2
+        t2.move_to(tri2).shift(LEFT*0.3,DOWN*0.15)
+        
+        return VGroup(t1,t2,tri1,tri2)
