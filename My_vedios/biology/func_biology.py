@@ -25,7 +25,7 @@ class ZesTable():
         """填写表格内容,输入的为一个list列表"""
         n = 0
         texts = VGroup(*[Text('') for i in range(self.rows*self.cols)])
-        while n < self.rows*self.cols:
+        while n < len(text):
             texts[n].become(Text(text[n],font='Source Han Sans SC',weight=MEDIUM).scale(0.66))
             n += 1
             continue
