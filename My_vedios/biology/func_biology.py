@@ -1,6 +1,3 @@
-
-
-
 from manim import*
 
 class ZesTable():
@@ -53,70 +50,7 @@ ZesTable()类用于绘制生物棋盘法的表格，
         t1.move_to(tri1).shift(RIGHT*0.3,UP*0.15)
         t2 = Text(b).scale(0.7).set_color(BLUE)
         t2.move_to(tri2).shift(LEFT*0.3,DOWN*0.15)
-        
-        return VGroup(t1,t2,tri1,tri2)
-
-    class FillRectangleToCenter():
-    def __init__(self,rec:Rectangle):
-        self.rec = rec
-
-    def get_rec_dots(self):
-        points = self.rec.get_all_points()
-        lists = [points[0],points[4],points[7],points[11]]
-        dots = VGroup(*[Text('') for i in range(4)])
-        for i in range(4):
-            dots[i].become(Dot(lists[i]))
-
-        return dots 
-
-    def fill_with_color(self,color=WHITE,opacity=1):
-        dots = self.get_rec_dots()
-
-        dot_a = dots[0].scale(0.001)
-        dot_b = dots[1].scale(0.001)
-        dot_c = dots[2].scale(0.001)
-        dot_d = dots[3].scale(0.001)
-
-        rec_copy = self.rec.copy()
-
-        l_ab = Line(dot_a,dot_b,stroke_width=5).set_color(color).set_opacity(opacity)
-        l_bc = Line(dot_b,dot_c,stroke_width=5).set_color(color).set_opacity(opacity)
-        l_cd = Line(dot_c,dot_d,stroke_width=5).set_color(color).set_opacity(opacity)
-        l_da = Line(dot_d,dot_a,stroke_width=5).set_color(color).set_opacity(opacity)
-        
-        def updater_dot(target):
-            def anim(obj,dt):
-                obj.shift(
-                    (target.get_center() - obj.get_center())*dt*1.3
-                )
-            return anim
-
-        def put_line_on(a,b):
-            def update(line):
-                line.put_start_and_end_on(a.get_center(),b.get_center())
-            return update
-
-        dot_a.add_updater(updater_dot(dot_b))
-        dot_b.add_updater(updater_dot(dot_c))
-        dot_c.add_updater(updater_dot(dot_d))
-        dot_d.add_updater(updater_dot(dot_a))
-
-        #self.add(dot_a,dot_b,dot_c,dot_d)
-
-        l_ab.add_updater(put_line_on(dot_a,dot_b))
-        l_bc.add_updater(put_line_on(dot_b,dot_c))
-        l_cd.add_updater(put_line_on(dot_c,dot_d))
-        l_da.add_updater(put_line_on(dot_d,dot_a))
-
-        trace = VGroup()
-        trace.add_updater(lambda a:a.add(
-            l_ab.copy().clear_updaters(),
-            l_bc.copy().clear_updaters(),
-            l_cd.copy().clear_updaters(),
-            l_da.copy().clear_updaters(),
-        ))
-
-        return VGroup(rec_copy,dot_a,dot_b,dot_c,dot_d,l_ab,l_bc,l_cd,l_da,trace,rec_copy)        
+        return VGroup(t1,t2,tri1,tri2) 
 #################################################################
     
 """以下是用于给矩形上色的两个类
