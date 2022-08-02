@@ -4,6 +4,7 @@
 来自MK官方文档：https://docs.manim.org.cn/documentation/utils/space_ops.html
 2.获取圆外一点与圆切点的函数 get_tangent_line()
 来自@bilibili_UP主josepa的专栏:https://b23.tv/2mY0kDx
+3.放了一些自己写的类（作用应该标明清楚了）
 """
 
 from manim import*
