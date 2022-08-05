@@ -4,7 +4,7 @@
 来自MK官方文档：https://docs.manim.org.cn/documentation/utils/space_ops.html
 2.获取圆外一点与圆切点的函数 get_tangent_line()
 来自@bilibili_UP主josepa的专栏:https://b23.tv/2mY0kDx
-3.放了一些自己写的类（作用应该标明清楚了）
+3.放了一些自己写的类（作用应该都标明清楚了吧）
 """
 
 from manim import*
@@ -72,70 +72,92 @@ def get_tangent_line(px, py, cx, cy, r):
   
   return [q1x, q1y, q2x, q2y]
 
-#################################################################
+#################################################################################3
 
-class NBisector():
-    """此类用于绘制N等分线（一条）"""
-    def __init__(self,n:int,line1:Line,line2:Line):
-        self.n = n 
-        self.line1 = line1
-        self.line2 = line2
+def get_length_beteen_two_dots(dot1:Dot,dot2:Dot):
+    """获取两点间的距离"""
+    vec = dot1.get_center() - dot2.get_center()
+    length = np.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
+    return length
 
-    def get_the_line(self,line:Line):
-        """请输入靠左边的Line"""
-        dot = Dot(get_intersect(self.line1,self.line2,line))
-        angle = Angle(self.line1,self.line2)
-        angle_value = angle.get_value()
-        rotate_dot = Dot(line.get_all_points()[3]).rotate((PI-angle_value)/self.n,about_point=dot.get_center())
-        line_copy = Line(dot,rotate_dot)
-        return line_copy
+def get_line_length(line:Line):
+    """获取一条Line的长度"""
+    vec = line.get_vector()
+    length = np.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
+    return length
 
-class ZesNBisector(NBisector):
-    """更优雅的作图"""
-    def __init__(self,n:int,line1:Line,line2:Line):
-        NBisector.__init__(self,n,line1,line2)
-    
-    def get_the_line(self,line:Line):
-        """请输入靠左边的Line"""
-        dot = Dot(get_intersect(self.line1,self.line2,line))
-        angle = Angle(self.line1,self.line2)
-        angle_value = angle.get_value()
-        rotate_dot = Dot(line.get_all_points()[3]).rotate((PI-angle_value)/self.n,about_point=dot.get_center())
-        line_copy = Line(dot,rotate_dot)
-        return VGroup(line_copy,dot)
+#############################################################################################
 
-    def get_zes_line(self,line_1:Line,line_2:Line):
-        vg = self.get_the_line(line_1)
-        line_a = vg[0].scale(100)
-        intersection = Dot(get_intersect(line_a,line_2,line_2))
-        target = Line(vg[1],intersection)
-        return VGroup(intersection,target)
-
-##################################################################################
-    
 class VerticalLine():
-    """作直线外一点到此直线的一条垂线段"""
+    """"作直线外一点到此直线的垂线段"""
     def __init__(self,line:Line,dot:Dot):
         self.a = line.get_vector()[0]
         self.b = line.get_vector()[1]
-        #self.c = line.get_vector()[2]
         self.dot = dot
-        self.line = linear
+        self.line = line
         
     def calculate(self):
         def func(numbers:list):
             x,y = numbers[0],numbers[1]
             return [
             x*self.a + y*self.b ,
-            np.sqrt((x-self.a)**2 + (y-self.b)**2) - 100
+            np.sqrt((x-self.a)**2 + (y-self.b)**2) - 40
         ]  
         return fsolve(func,[0,0])
 
-    def get_zes_line(self,line:Line):
+    def get_zes_line(self):
         vec = self.calculate()
         dot1 = Dot(point=[vec[0]+self.dot.get_center()[0],vec[1]+self.dot.get_center()[1],0])
-        line1 = line.copy().scale(100)
+        line1 = self.line.copy().scale(100)
         line2 = Line(dot1,self.dot).scale(100)
-        interpoint = Dot(get_intersect(line1,line2,line2))
-        target_line = Line(self.dot,interpoint)
+        interpoint = Dot(get_intersect(line1,line2,line2)).scale(0.5)
+        target_line = Line(self.dot.scale(0.5),interpoint)
         return VGroup(interpoint,target_line)
+
+###############################################################################################
+
+class NBisector():
+    """作一条n等分线"""
+    def __init__(self,line1:Line,line2:Line,n=2):
+        self.vec1 = line1.get_vector()
+        self.vec2 = line2.get_vector()
+        self.l1 = line1
+        self.l2 = line2
+        self.n = n
+    
+    def get_the_bisector(self,line:Line) -> Line :
+        module1 = get_length_beteen_two_dots(Dot([self.vec1]),Dot())
+        module2 = get_length_beteen_two_dots(Dot([self.vec2]),Dot())
+        a = module1*module2
+        b = self.vec1[0]*self.vec2[0] + self.vec1[1]*self.vec2[1]
+        cos = b/a
+        angle = (PI-math.acos(cos))/self.n
+        target = line.copy().rotate(angle,about_point=get_intersect(self.l1,self.l2,line))
+        return target
+
+class ZesNBisector(NBisector):
+    """作一条n等分线并交于第三边"""
+    def __init__(self,line1:Line,line2:Line,n=2):
+        NBisector.__init__(self,line1,line2,n)
+
+    def get_the_bisector(self, line: Line):
+        module1 = get_length_beteen_two_dots(Dot([self.vec1]),Dot())
+        module2 = get_length_beteen_two_dots(Dot([self.vec2]),Dot())
+        a = module1*module2
+        b = self.vec1[0]*self.vec2[0] + self.vec1[1]*self.vec2[1]
+        cos = b/a
+        angle = (PI-math.acos(cos))/self.n
+        target = line.copy().rotate(angle,about_point=get_intersect(self.l1,self.l2,line))
+        dot = Dot(get_intersect(self.l1,self.l2,self.l2))
+        return VGroup(dot,target)
+
+    def get_zes_Line(self,line_1:Line,line_2:Line):
+        """line_1：line1或line2，line_2：第三条边
+        """
+        vg = self.get_the_bisector(line_1)
+        line_a = vg[1].scale(1000)
+        line_b = line_2.copy().scale(1000)
+        intersection = Dot(get_intersect(line_a,line_b,line_2))
+
+        target = Line(vg[0].scale(0.1),intersection.copy().scale(0.1))
+        return VGroup(vg[0].scale(0.5),target,intersection.scale(0.5))
