@@ -220,7 +220,7 @@ class FillRectangleToRight(VGroup):
 
 
 class SwallowIn(Homotopy):
-
+    """乐正老师 NB !"""
     def __init__(self, mobject, target, **kwargs):
         #config(self, kwargs, locals())
 
