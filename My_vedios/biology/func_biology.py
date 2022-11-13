@@ -297,3 +297,64 @@ class DialogBox(VGroup):
         self.b_c = self.box.copy().set_stroke(opacity=1)
         self.add(self.box,self.sector,self.b_c)
         self.sector.next_to(self.box,DOWN,buff=0).shift(LEFT*width/3)
+
+        
+class SisterChromosome(VGroup):
+    def __init__(
+        self,
+        gene1_text = '',
+        gene1_copy_text = '',
+        gene2_text = '',
+        gene2_copy_text = '',
+        gene1_color = WHITE,
+        gene1_copy_color = WHITE,
+        gene2_color = WHITE,
+        gene2_copy_color = WHITE, 
+        center_color = RED_B,
+        sister_color = WHITE,
+        width = 1
+    ):
+        """g1:0,g1c:1,g2:4,g2c:5"""
+        super().__init__()
+        centromere = Dot().set_color(center_color).scale(1.1)
+        points = [*[[] for i in range(8)]]
+        parts = VGroup(*[VMobject() for i in range(8)])
+        parts.add(centromere)
+        colors = [gene1_color,gene1_copy_color,gene2_color,gene2_copy_color,sister_color,sister_color,sister_color,sister_color]
+        for j in range(-100,100):
+            x = 0.01*j
+            y = (0.01*j)**2/3
+            z = 0
+            center1 = [x,y,z]
+            center2 = [x,-y,z]
+            if j > 80:
+                p0 = center1
+                p1 = center2
+                points[0].append(p0)
+                points[1].append(p1)
+            elif -60 <= j <=80:
+                p2 = center1
+                p3 = center2 
+                points[4].append(p2)
+                points[5].append(p3)    
+            elif -85 <= j < -60:
+                p4 = center1
+                p5 = center2
+                points[2].append(p4)
+                points[3].append(p5)
+            else:
+                p6 = center1
+                p7 = center2 
+                points[6].append(p6)
+                points[7].append(p7) 
+        for i in range(8):
+            parts[i].set_points_smoothly(points[i])
+            parts[i].set_color(colors[i]).set_stroke(width=5*width).rotate(PI/2,about_point=ORIGIN)
+        vgroup = parts
+        texts = [gene1_text,gene1_copy_text,gene2_text,gene2_copy_text]
+        zestexts = VGroup(*[ZesText(texts[i]) for i in range(4)]).scale(0.6)
+        zestexts[0].next_to(vgroup[0],LEFT,buff=0.1).set_color(gene1_color).shift(DOWN*0.13)
+        zestexts[1].next_to(vgroup[1],RIGHT,buff=0.1).set_color(gene1_copy_color).shift(DOWN*0.13)
+        zestexts[2].next_to(vgroup[2],LEFT,buff=0.1).set_color(gene2_color).shift(UP*0.1)
+        zestexts[3].next_to(vgroup[3],RIGHT,buff=0.1).set_color(gene2_copy_color).shift(UP*0.1)
+        self.add(vgroup.scale(0.6),zestexts.scale(0.6))        
