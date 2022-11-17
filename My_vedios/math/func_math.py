@@ -161,3 +161,53 @@ class ZesNBisector(NBisector):
 
         target = Line(vg[0].scale(0.1),intersection.copy().scale(0.1))
         return VGroup(vg[0].scale(0.5),target,intersection.scale(0.5))
+    
+    
+   ################################################################3
+class InterpointFromTwoCircles(VGroup):
+    def __init__(self,cir1,cir2,scale=0.8):
+        super().__init__()
+        vmob = Difference(cir1,cir2)
+        points = vmob.get_all_points()
+        m1 = cir1.get_all_points()[0]
+        m2 = cir2.get_all_points()[0]
+        dot_c = Dot(cir1.get_center())
+        c1 = dot_c.get_center()
+        c2 = cir2.get_center()
+        radiu1 = get_length_beteen_two_points(m1,c1)
+        radiu2 = get_length_beteen_two_points(m2,c2)
+        list1 = []
+        for i in range(len(points)):   
+            if -0.01 < get_length_beteen_two_points(points[i],c1) - radiu1 < 0.01:
+                if -0.01 < get_length_beteen_two_points(points[i],c2) - radiu2 < 0.01:
+                    list1.append(points[i])
+        dot1 = Dot(list1[0]).set_color(GREEN).scale(scale)
+        dot2 = Dot(list1[1]).set_color(GREEN).scale(scale)
+        self.add(dot1,dot2)
+        
+
+class InterpointFromCircleAndLine(VGroup):
+    def __init__(self,cir:Circle,line:Line,scale=0.8):
+        super().__init__()
+        cir_c = cir.copy().flip(axis=line.get_vector(),about_point=line.get_center())
+        interpoints = Difference(cir,cir_c).get_all_points()
+        m = Dot(cir.get_all_points()[0])
+        dot_c = Dot(cir.get_center())
+        radiu = get_length_beteen_two_dots(m,dot_c)
+        verline = VerticalLine(line,dot_c).get_zes_dot_and_line()[0]
+        d = get_length_beteen_two_dots(dot_c,verline)
+        length = 2*np.sqrt(radiu**2-d**2)
+        list1 = []
+        list2 = []
+        for i in range(len(interpoints)):
+            for j in range(len(interpoints)):
+                if i != j:
+                    vec = interpoints[i] - interpoints[j]
+                    line_vec = line.get_vector()
+                    if -0.009<vec[0]*line_vec[1] - vec[1]*line_vec[0]<0.009:
+                        if -0.008<get_length_beteen_two_points(interpoints[i],interpoints[j]) - length<0.008:        
+                            list1.append(interpoints[i])
+                            list2.append(interpoints[j])
+        dot1 = Dot(list1[0]).set_color(GREEN).scale(scale)
+        dot2 = Dot(list2[0]).set_color(GREEN).scale(scale)
+        self.add(dot1,dot2)
