@@ -161,7 +161,42 @@ class ZesNBisector(NBisector):
 
         target = Line(vg[0].scale(0.1),intersection.copy().scale(0.1))
         return VGroup(vg[0].scale(0.5),target,intersection.scale(0.5))
-    
+   ######3###########################################################
+    ##########################################################        
+
+class VerticalLine():
+    """Fran NB!"""
+    def __init__(self,line:Line,dot:Dot):
+        self.line = line
+        self.dot = dot.get_center()
+
+    def get_zes_dot_and_line(self):
+        dot_a = self.line.get_all_points()[1]
+        vec1 = dot_a - self.dot
+        unit_vec = self.line.copy().rotate(PI/2).get_vector()
+        unit = get_line_length(self.line)
+        vec2 = unit_vec/unit
+        vec3 = np.dot(vec1,vec2)*vec2
+        dot = vec3 + self.dot
+        line2 = Line(self.dot,dot)
+        return VGroup(Dot(dot).scale(0.5),line2)
+
+class DashedVerticalLine():
+    """Fran NB!"""
+    def __init__(self,line:Line,dot:Dot):
+        self.line = line
+        self.dot = dot.get_center()
+
+    def get_zes_dot_and_line(self):
+        dot_a = self.line.get_all_points()[1]
+        vec1 = dot_a - self.dot
+        unit_vec = self.line.copy().rotate(PI/2).get_vector()
+        unit = get_line_length(self.line)
+        vec2 = unit_vec/unit
+        vec3 = np.dot(vec1,vec2)*vec2
+        dot = vec3 + self.dot
+        line2 = DashedLine(self.dot,dot)
+        return VGroup(Dot(dot).scale(0.5),line2)
     
    ################################################################3
 class InterpointFromTwoCircles(VGroup):
