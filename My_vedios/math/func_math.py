@@ -197,10 +197,9 @@ class DashedVerticalLine():
         dot = vec3 + self.dot
         line2 = DashedLine(self.dot,dot)
         return VGroup(Dot(dot).scale(0.5),line2)
-    
-   ################################################################3
+#####################################################################
 class InterpointFromTwoCircles(VGroup):
-    def __init__(self,cir1,cir2,scale=0.8):
+    def __init__(self,cir1,cir2,color='#8a8eff',scale=1):
         super().__init__()
         vmob = Difference(cir1,cir2)
         points = vmob.get_all_points()
@@ -216,33 +215,61 @@ class InterpointFromTwoCircles(VGroup):
             if -0.01 < get_length_beteen_two_points(points[i],c1) - radiu1 < 0.01:
                 if -0.01 < get_length_beteen_two_points(points[i],c2) - radiu2 < 0.01:
                     list1.append(points[i])
-        dot1 = Dot(list1[0]).set_color(GREEN).scale(scale)
-        dot2 = Dot(list1[1]).set_color(GREEN).scale(scale)
-        self.add(dot1,dot2)
-        
+        if len(list1) > 0:
+            dot1 = Dot(list1[0]).set_color(color).scale(scale)
+            dot1_c = dot1.copy()
+            dot2 = None
+            self.add(dot1)
+            i = 1
+            if len(list1) > 2:
+                while i <= len(list1)-1:
+                    if (list1[i] == list1[0]).all():
+                        i += 1
+                        continue
+                    else:
+                        dot2 = Dot(list1[i]).set_color(color).scale(scale)
+                        break
+            if dot2 == None:
+                self.add(dot1,dot1_c)
+            else:
+                self.add(dot1,dot2)
+        else:
+            dot1 = Dot().set_opacity(0)
+            dot1_c = dot1.copy()
+            self.add(dot1,dot1_c)
 
 class InterpointFromCircleAndLine(VGroup):
-    def __init__(self,cir:Circle,line:Line,scale=0.8):
+    def __init__(self,cir:Circle,line:Line,color='#8a8eff',scale=1):
         super().__init__()
-        cir_c = cir.copy().flip(axis=line.get_vector(),about_point=line.get_center())
-        interpoints = Difference(cir,cir_c).get_all_points()
-        m = Dot(cir.get_all_points()[0])
-        dot_c = Dot(cir.get_center())
-        radiu = get_length_beteen_two_dots(m,dot_c)
-        verline = VerticalLine(line,dot_c).get_zes_dot_and_line()[0]
-        d = get_length_beteen_two_dots(dot_c,verline)
-        length = 2*np.sqrt(radiu**2-d**2)
-        list1 = []
-        list2 = []
-        for i in range(len(interpoints)):
-            for j in range(len(interpoints)):
-                if i != j:
-                    vec = interpoints[i] - interpoints[j]
-                    line_vec = line.get_vector()
-                    if -0.009<vec[0]*line_vec[1] - vec[1]*line_vec[0]<0.009:
-                        if -0.008<get_length_beteen_two_points(interpoints[i],interpoints[j]) - length<0.008:        
-                            list1.append(interpoints[i])
-                            list2.append(interpoints[j])
-        dot1 = Dot(list1[0]).set_color(GREEN).scale(scale)
-        dot2 = Dot(list2[0]).set_color(GREEN).scale(scale)
-        self.add(dot1,dot2)
+        cir_center = cir.get_center()
+        line1 = line
+        line2 = line1.copy().rotate(TAU)
+        points1 = line1.get_all_points()
+        points2 = line2.get_all_points()
+        if (cir_center != points1[0]).all():
+            vec1 = cir_center - points1[0]
+            vec2 = cir_center - points2[0]
+        else:
+            vec1 = cir_center - points1[0]
+            vec2 = cir_center - points2[0]
+        unit_vec0 = line.get_unit_vector()
+        unit_vec1 = vec1/get_norm(vec1)
+        unit_vec2 = vec2/get_norm(vec2)
+        if self.judge(unit_vec0,unit_vec1) != 0 and self.judge(unit_vec0,unit_vec2) != 0:
+            cir_c = cir.copy().flip(axis=line.get_vector(),about_point=line.get_center())
+            dots = InterpointFromTwoCircles(cir,cir_c,color)
+            for dot in dots:
+                self.add(dot)
+        else:
+            m = Dot(cir.get_all_points()[0])
+            dot_c = Dot(cir.get_center())
+            radiu = get_length_beteen_two_dots(m,dot_c)
+            vec = line.get_unit_vector()
+            dot1 = Dot(dot_c.get_center()).shift(vec*radiu).set_color(color).scale(scale)
+            dot2 = Dot(dot_c.get_center()).shift(-vec*radiu).set_color(color).scale(scale)
+            self.add(dot1,dot2)
+    def judge(self,vec1,vec2):
+        if vec1[0]*vec2[1] - vec1[1]*vec2[0] == 0:
+            return 0
+        else:
+            return 1
