@@ -26,4 +26,4 @@ class ThreeSVG_Example(Scene):
         vmob = ThreeSVG()
         self.add(vmob)
 ```
-[ThreeSVG_Example](/source/ThreeSVG_Example_ManimCE_v0.16.0.post0.png)
+![ThreeSVG_Example](/source/ThreeSVG_Example_ManimCE_v0.16.0.post0.png)
