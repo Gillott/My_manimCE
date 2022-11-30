@@ -17,4 +17,4 @@
         svg2 = SVGMobject("D:\\SVG\\coin.svg").set_opacity(1).set_color(GRAY)
         svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(GRAY)
         self.add(svg1,svg2,svg3)
->```
+```
