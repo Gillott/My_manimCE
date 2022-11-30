@@ -19,3 +19,11 @@
         svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(GRAY)
         self.add(svg1,svg2,svg3)
 ```
+```py
+from manim import *
+class Test(Scene):
+    def construct(self):
+        vmob = ThreeSVG()
+        self.add(vmob)
+```
+![Test]()
