@@ -5,7 +5,7 @@
 >* #### 相关代码：无  
 ## `func_math.py`
 >**NOTE**
->- #### `func_math.py` 用于存放一些视频制作所需的额外源码,****不全为原创****。
+>- #### `func_math.py` 用于存放一些视频制作所需的额外源码,***不全为原创***。
 >- #### Example
 >    * #### `ThreeSVG` 相关 SVG 文件：[good.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/good.svg)，[coin.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/coin.svg)，[favo.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/favo.svg)
 >    * #### `ThreeSVG` 相关源码及使用示例：
