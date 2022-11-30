@@ -8,11 +8,11 @@
 >**NOTE**  
 >- #### 源码虽多，***但并非全为本人原创！*** 
 >    #### 比如：
->    * #### 获取圆外一点与圆切点的函数 ```get_tangent_line``` 取自 UP 主 [josepa ](https://space.bilibili.com/99579008) 的专栏：https://b23.tv/2mY0kDx
+>    * #### 获取过圆外一点的直线与圆切线所对应切点坐标的函数 ```get_tangent_line``` 取自 UP 主 [josepa ](https://space.bilibili.com/99579008) 的专栏：https://b23.tv/2mY0kDx
 >    * #### 还有一些优秀的轮子大多取自 MK 官方文档或者 GitHub：
 >        * #### https://github.com/manim-kindergarten/manim_sandbox
->        * #### https://docs.manim.org.cn/
->- #### 一些自定义类还需额外导入文件才能使用
+>        * #### https://docs.manim.org.cn
+>- #### 部分自定义类需要额外导入第三方文件才能使用
 >    #### Example
 >    * #### `ThreeSVG` 相关 SVG 文件：[good.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/good.svg)，[coin.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/coin.svg)，[favo.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/favo.svg)
 >    * #### `ThreeSVG` 相关源码及使用示例：
