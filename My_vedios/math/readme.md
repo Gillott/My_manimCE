@@ -6,7 +6,7 @@
   
 ## 备注：`func_math.py` 主要用于存放部分轮子的源码  
 ###其中：
-* ```py
+```py
 class MurCat(VGroup):
     """mur猫表情包"""
     def __init__(self,**kwargs):
@@ -16,7 +16,7 @@ class MurCat(VGroup):
  ```
 * #### `MurCat` 相关 SVG 文件：[murcat.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/murcat.svg)
 ```py
-* class ThreeSVG(VGroup):
+ class ThreeSVG(VGroup):
     """一键三连"""
     def __init__(self,**kwargs):
         VGroup.__init__(self,**kwargs)
