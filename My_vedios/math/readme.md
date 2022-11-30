@@ -8,7 +8,7 @@
 >- #### `func_math.py` 主要用于存放部分轮子的源码  
 >- #### Example
 >    * #### `ThreeSVG` 相关 SVG 文件：[good.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/good.svg)，[coin.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/coin.svg)，[favo.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/favo.svg)
-```py
+>```py
  class ThreeSVG(VGroup):
     """一键三连"""
     def __init__(self,**kwargs):
@@ -17,4 +17,4 @@
         svg2 = SVGMobject("D:\\SVG\\coin.svg").set_opacity(1).set_color(GRAY)
         svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(GRAY)
         self.add(svg1,svg2,svg3)
-```
+>```
