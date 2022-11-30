@@ -1,4 +1,4 @@
-## 数学类视频
+# 数学类视频
 ## func_math.py
 **`func_math.py` 主要用于存放部分轮子的源码。**
 * #### `MurCat 类`相关 SVG 文件：[MurCat.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/MurCat.svg)
