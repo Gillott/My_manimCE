@@ -7,16 +7,7 @@
 >**NOTE**
 >- #### `func_math.py` 主要用于存放部分轮子的源码  
 >- #### `example`
->  - ####`MurCat` 相关 SVG 文件：[murcat.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/murcat.svg)]
-```py
-class MurCat(VGroup):
-    """mur猫表情包"""
-    def __init__(self,**kwargs):
-        VGroup.__init__(self,**kwargs)
-        svg = SVGMobject("D:\\SVG\\murCat.svg").set_color(WHITE)
-        self.add(svg)
- ```
->  * [`MurCat` 相关 SVG 文件：[murcat.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/murcat.svg)](#`MurCat` 相关 SVG 文件：[murcat.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/murcat.svg))
+>-    * #### `ThreeSVG` 相关 SVG 文件：[good.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/good.svg)，[coin.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/coin.svg)，[favo.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/favo.svg)
 ```py
  class ThreeSVG(VGroup):
     """一键三连"""
@@ -27,4 +18,3 @@ class MurCat(VGroup):
         svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(GRAY)
         self.add(svg1,svg2,svg3)
 ```
->  * #### `ThreeSVG` 相关 SVG 文件：[good.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/good.svg)，[coin.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/coin.svg)，[favo.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/favo.svg)
