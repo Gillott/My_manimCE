@@ -4,8 +4,7 @@
 ### 2.待添加.jpg
 * #### 相关代码：暂无  
   
-## 备注：**func_math.py**
-### `func_math.py` 主要用于存放部分轮子的源码。  
+## 备注：### `func_math.py` ## 主要用于存放部分轮子的源码。  
 ```py
 class MurCat(VGroup):
     """mur猫表情包"""
