@@ -21,9 +21,9 @@
 ```
 ```py
 from manim import *
-class Test(Scene):
+class ThreeSVG_Example(Scene):
     def construct(self):
         vmob = ThreeSVG()
         self.add(vmob)
 ```
-![Test]()
+![ThreeSVG_Example](/source/ThreeSVG_Example_ManimCE_v0.16.0.post0.png)
