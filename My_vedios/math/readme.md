@@ -4,9 +4,9 @@
 >### 2.[〔manim | 待定〕未命名]()
 >* #### 相关代码：无  
 ## `func_math.py`
+#### `func_math.py` 用于存放一些视频制作所需的额外源码。
 >**NOTE**
->- #### `func_math.py` 用于存放一些视频制作所需的额外源码。
->    ***但并非全为本人原创！***
+> ***但并非全为本人原创！***
 >    * #### 获取圆外一点与圆切点的函数 ```get_tangent_line``` 取自 UP 主 [josepa ](https://space.bilibili.com/99579008) 的专栏：https://b23.tv/2mY0kDx
 >    * #### 一些优秀的轮子大多来自 MK 官方文档或者 GitHub：
 >        * #### https://github.com/manim-kindergarten/manim_sandbox
