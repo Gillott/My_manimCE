@@ -8,7 +8,7 @@
 >**NOTE**  
 >- #### 源码虽多，***但并非全为本人原创！*** 
 >    #### 比如：
->    * #### 获取过圆外一点的直线与圆切线所对应切点坐标的函数 ```get_tangent_line``` 取自 UP 主 [josepa ](https://space.bilibili.com/99579008) 的专栏：
+>    * #### 获取圆外一点与圆所成切点的相应坐标的函数 ```get_tangent_line``` 取自 UP 主 [josepa ](https://space.bilibili.com/99579008) 的专栏：
 >        * #### https://b23.tv/2mY0kDx
 >    * #### 另一些优秀的轮子大多取自 MK 官方文档或者 GitHub：
 >        * #### https://docs.manim.org.cn
