@@ -3,7 +3,7 @@
 * #### 相关代码：[parabola_1.py](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/parabola_1.py)，[func_math.py](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/func_math.py)  
 ### 2.待添加.jpg
 * #### 相关代码：暂无  
-  
+## `func_math.py`
 >**NOTE**
 >- #### `func_math.py` 主要用于存放部分轮子的源码  
 ```py
