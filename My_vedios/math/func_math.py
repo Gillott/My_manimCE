@@ -8,7 +8,24 @@
 """
 
 from manim import*
-
+#SVG 图片类
+############################################
+class MurCat(VGroup):
+    """mur猫表情包"""
+    def __init__(self,**kwargs):
+        VGroup.__init__(self,**kwargs)
+        svg = SVGMobject("D:\\SVG\\murCat.svg").set_color(WHITE)
+        self.add(svg)
+        
+class ThreeSVG(VGroup):
+    """一键三连"""
+    def __init__(self,**kwargs):
+        VGroup.__init__(self,**kwargs)
+        svg1 = SVGMobject("D:\\SVG\\good.svg").set_opacity(1).set_color(GRAY)
+        svg2 = SVGMobject("D:\\SVG\\coin.svg").set_opacity(1).set_color(GRAY)
+        svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(GRAY)
+        self.add(svg1,svg2,svg3)
+        
 def get_intersect(line1, line2, parallel):
     p1, p2 = line1.get_start_and_end()
     p3, p4 = line2.get_start_and_end()
@@ -73,18 +90,37 @@ def get_tangent_line(px, py, cx, cy, r):
   return [q1x, q1y, q2x, q2y]
 
 #################################################################################3
-
+#计算 VMobject 距离
+def get_norm(vector:Vector):
+    vec = vector.copy()
+    norm = np.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
+    return norm
+def get_length_beteen_two_points(dot1,dot2):
+    vec = dot1 - dot2
+    length = get_norm(vec)
+    return length
 def get_length_beteen_two_dots(dot1:Dot,dot2:Dot):
-    """获取两点间的距离"""
     vec = dot1.get_center() - dot2.get_center()
     length = np.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
     return length
 
+    
 def get_line_length(line:Line):
-    """获取一条Line的长度"""
     vec = line.get_vector()
     length = np.sqrt(vec[0]**2 + vec[1]**2 + vec[2]**2)
     return length
+def get_angle_between_two_vecs(vec1,vec2):
+    module1 = get_length_beteen_two_dots(Dot([vec1]),Dot())
+    module2 = get_length_beteen_two_dots(Dot([vec2]),Dot())
+    a = module1*module2
+    b = vec1[0]*vec2[0] + vec1[1]*vec2[1]
+    cos = b/a
+    angle = math.acos(cos)
+    return angle
+def get_angle_between_two_lines(line1:Line,line2:Line):
+    vec1 = line1.get_vector()
+    vec2 = line2.get_vector()
+    return get_angle_between_two_vecs(vec1,vec2)
 
 #############################################################################################
 
