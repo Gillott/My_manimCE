@@ -12,7 +12,8 @@
 >    * #### 还有一些优秀的轮子大多取自 MK 官方文档或者 GitHub：
 >        * #### https://github.com/manim-kindergarten/manim_sandbox
 >        * #### https://docs.manim.org.cn/
->- #### Example
+>- #### 一些自定义类还需额外导入文件才能使用
+>    #### Example
 >    * #### `ThreeSVG` 相关 SVG 文件：[good.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/good.svg)，[coin.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/coin.svg)，[favo.svg](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/favo.svg)
 >    * #### `ThreeSVG` 相关源码及使用示例：
 ```py
