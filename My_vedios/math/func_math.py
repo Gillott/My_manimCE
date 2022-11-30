@@ -10,20 +10,23 @@
 from manim import*
 #SVG 图片类
 ############################################
-class MurCat(VGroup):
-    """mur猫表情包"""
+class ThreeSVG(VGroup):
+    """一键三连"""
     def __init__(self,**kwargs):
         VGroup.__init__(self,**kwargs)
-        svg = SVGMobject("D:\\SVG\\murCat.svg").set_color(WHITE)
-        self.add(svg)
+        svg1 = SVGMobject("D:\\SVG\\good.svg").set_opacity(1).set_color(RED)
+        svg2 = SVGMobject("D:\\SVG\\coin.svg").set_opacity(1).set_color(ORANGE)
+        svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(PINK)
+        VGroup(svg1,svg2,svg3).arrange_submobjects(buff=1.3)
+        self.add(svg1,svg2,svg3)
         
 class ThreeSVG(VGroup):
     """一键三连"""
     def __init__(self,**kwargs):
         VGroup.__init__(self,**kwargs)
-        svg1 = SVGMobject("D:\\SVG\\good.svg").set_opacity(1).set_color(GRAY)
-        svg2 = SVGMobject("D:\\SVG\\coin.svg").set_opacity(1).set_color(GRAY)
-        svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(GRAY)
+        svg1 = SVGMobject("D:\\SVG\\good.svg").set_opacity(1).set_color(RED)
+        svg2 = SVGMobject("D:\\SVG\\coin.svg").set_opacity(1).set_color(ORANGE)
+        svg3 = SVGMobject("D:\\SVG\\favo.svg").set_opacity(1).set_color(PINK)
         self.add(svg1,svg2,svg3)
         
 def get_intersect(line1, line2, parallel):
