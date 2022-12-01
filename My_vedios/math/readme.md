@@ -36,4 +36,4 @@ class ThreeSVG_Example(Scene):
         self.add(vmob)
 ```
 ![ThreeSVG_Example](https://github.com/Gillott/My_manimCE/blob/main/My_vedios/math/source/ThreeSVG_Example_ManimCE_v0.16.0.post0.png)
-## 一键三连，请∠( ᐛ 」∠)
+## 一键三连，请。∠( ᐛ 」∠)
