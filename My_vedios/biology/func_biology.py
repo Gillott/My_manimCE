@@ -358,3 +358,18 @@ class SisterChromosome(VGroup):
         zestexts[2].next_to(vgroup[2],LEFT,buff=0.1).set_color(gene2_color).shift(UP*0.1)
         zestexts[3].next_to(vgroup[3],RIGHT,buff=0.1).set_color(gene2_copy_color).shift(UP*0.1)
         self.add(vgroup.scale(0.6),zestexts.scale(0.6))        
+
+class ZPoker(VGroup):
+    def __init__(self,content,back_logo_text="$\mathbb{Z}$",content_scale=1,
+        back_logo_text_scale=1.3,color=[ORANGE,PINK]):
+        VGroup.__init__(self)
+        k = 1.543
+        text = ZesText(content).set_color(color).scale(content_scale)
+        rec1 = RoundedRectangle(corner_radius=0.15,height=0.85*k,width=0.85).set_opacity(1).set_color('#f8f8f8')
+        rec2 = RoundedRectangle(corner_radius=0.15,height=0.9*k,width=0.9).set_opacity(1).set_color(color)
+        rec3 = RoundedRectangle(corner_radius=0.15,height=0.9*k,width=0.9).set_opacity(1).set_color('#f8f8f8')
+        rec4 = RoundedRectangle(corner_radius=0.15,height=0.85*k,width=0.85).set_opacity(1).set_color(color)
+        back_logo = Tex(back_logo_text).scale(back_logo_text_scale).set_color(WHITE).flip()
+        self.add(text,rec1,rec2,rec3,rec4,back_logo)
+        for i in VGroup(text,rec1,rec2,rec3,rec4,back_logo):
+            self.add_to_back(i)
